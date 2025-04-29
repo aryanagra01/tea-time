@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tea tea tea!</title>
+    <meta name="description" content="Find out which tea you are!">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="intro-page">
+            <h1>TEA TIME</h1>
+            <h2>Discover your tea personality!</h2>
+            <p>Have you ever wondered which type of tea you would be? Take this quiz to find out!</p>
+
+            <button class="start-button">Begin Quiz</button>
+
+            <div class="tea-qualities-decoration">
+                <!-- place qualities sprite here -->
+                <span class="quality">☕</span>
+                <span class="quality">🍹</span>
+                <span class="quality">🥤</span>
+                <span class="quality">🫖</span>
+                <span class="quality">🧋</span>
+            </div>
+        </div>
+
+        <div class="quiz-page" style="display: none;">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" style="width: 0%;"></div>
+                </div>
+                <div class="question-number">Question number what of what goes here</div>
+            </div>
+            <div class="question-image">
+                <!--Place questions image below here-->
+                <!-- <img src="images/question-placeholder.png" alt="Question Image" class="question-image"> -->
+            </div>
+            <div class="question-text">Question goes here</div>
+            <div class="options">
+                <!-- Options will be inserted here via Javascript -->
+            </div>
+        </div>
+
+        
+        <div class="results-page" style="display: none;">
+
+            <div class="results-header"><h1>Your Tea Flavour Profile</h1></div>
+            
+            <div class="character-card">
+                <div class="card-header">
+                    <h2 class="result-type">XXXX</h2>
+                </div>
+
+                <!-- image of character -->
+                <div class="character-image">
+                    <img src="" alt="Character Image" class="character-image">
+                </div>
+
+                <!-- Population -->
+                <p class="population-text">This ingredient is X% of all ingredients in the world!</p>
+
+                <!-- trait boxes -->
+                <div class="trait-box trait"></div>
+
+                <!-- description boxes -->
+                <div class="description-box description"></div>
+
+
+                <!-- quote -->
+                <div class="quote quote-box"></div>
+
+                <!-- stats -->
+                <div class="stats-box">
+                    <div class="stat-row">
+                        <span class="stat-name">Sweetness</span>
+                        <div class="stat-value sweetness-stat"></div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-name">Adaptability</span>
+                        <div class="stat-value adaptability-stat"></div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-name">Boldness</span>
+                        <div class="stat-value boldness-stat"></div>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-name">Complexity</span>
+                        <div class="stat-value complexity-stat"></div>
+                    </div>
+                </div>
+
+                <!-- mbti compatibility -->
+                <div class="compatibility-section">
+                        <div class ="harmony">
+                            <span class ="compatibility-title">Flavour Harmony</span>
+                            <div class="compatibility-items">
+                                <div class="compatibility-item compatible1">
+                                    <img src="" alt="Compatible type 1">
+                                    <span class="compatibility-text"></span>
+                                </div>
+                                <div class="compatibility-item compatible2">
+                                    <img src="" alt="Compatible type 2">
+                                    <span class="compatibility-text"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class ="clash">
+                            <span class ="compatibility-title">Flavour Clash</span>
+                            <div class="compatibility-items">
+                                <div class="compatibility-item incompatible1">
+                                    <img src="" alt="incompatible type 1">
+                                    <span class="compatibility-text"></span>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+
+                <!-- footer -->
+                <div class="card-footer">
+                    Tea Flavour Personality Profile
+                </div>
+             </div>
+             <button class="restart-button">Take Quiz Again!</button>
+        </div>
+    </div>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
