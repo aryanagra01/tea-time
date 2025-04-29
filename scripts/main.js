@@ -502,7 +502,7 @@ class QuizUI {
         this.characterImage.alt = character.title;
 
         // set population text
-        this.populationText.textContent = `This ingredient is ${character.population} of all ingredients in the world!`;
+        this.populationText.textContent = `This flavour is ${character.population} of all ingredients in the world!`;
 
         // set traits
         this.trait.textContent = character.traits;
