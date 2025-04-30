@@ -414,7 +414,12 @@ class QuizUI {
         // compatibility elements
         this.compatible1 = document.getElementsByClassName("compatible1")[0].querySelector("img");
         this.compatible2 = document.getElementsByClassName("compatible2")[0].querySelector("img");
-        this.incompatible1 = document.getElementsByClassName("incompatible1")[0].querySelector("img");    }
+        this.incompatible1 = document.getElementsByClassName("incompatible1")[0].querySelector("img"); 
+        this.compatible1text = document.getElementsByClassName("compatible1")[0].getElementsByClassName("compatibility-text")[0];
+        this.compatible2text = document.getElementsByClassName("compatible2")[0].getElementsByClassName("compatibility-text")[0];
+        this.incompatible1text = document.getElementsByClassName("incompatible1")[0].getElementsByClassName("compatibility-text")[0];
+      
+      }
     
     // Initialize the quiz UI
     init() {
@@ -441,34 +446,47 @@ class QuizUI {
     // Load the current question and options
     loadQuestion() {
         // Update progress bar and question number
+        //progress is recieved as a percentage from getProgress function as question number/total questions
+        //progress width is percentage of progressBar class
         const progress = this.quiz.getProgress();
         this.progressBar.style.width = `${progress}%`;
+
+        //Replacs question text with question from questions dictionary
         this.questionNumber.textContent = `Question ${this.quiz.getQuestionNumber()} of ${questions.length}`;
 
-        // Get current question and update UI
+        // Get current question number in quiz class and use it as index to get question from questions dictionary
+        //Replace text in the question
         const currentQuestion = this.quiz.getCurrentQuestion();
         this.questionText.textContent = currentQuestion.question;
 
-        // Clear previous options
+        // Clear previous options by emptying out the options container
         this.optionsContainer.innerHTML = "";
 
         // Create option buttons
+        //Creates for each option in the list under currentQuestions
+        //Give each button a class for css and text content
+        //plces each button under optionsContainer 
         currentQuestion.options.forEach(option => {
             const button = document.createElement("button");
             button.classList.add("option-button");
             button.textContent = option.text;
-            
-            button.addEventListener("click", () => this.handleOptionSelect(option.type));
             this.optionsContainer.appendChild(button);
+            
+            //Call handleOptionSelect function which checks if quiz is complete or not
+            //Sends the type in the questions dictionary to the function to update score
+            button.addEventListener("click", () => this.handleOptionSelect(option.type));
+            
         });
     }
 
     // Handle option selection
     handleOptionSelect(type) {
         // Record answer and check if quiz is complete
+        //sends the type as well to update score
+        //recieved boolean if quiz is completed or not
         const isComplete = this.quiz.answerQuestion(type);
         
-        // Load next question or show result
+        // Load next question or show result based on boolean recievd from quiz class
         if (isComplete) {
             this.showResults();
         } else {
@@ -477,6 +495,9 @@ class QuizUI {
     }
 
     // generate star rating html
+    //create empty string first
+    //then from 0 to 4, if i value is less than rating, then make it solid, or lese make it empty
+    //does so by putting each elemnt in a span, and changing the class so that can change the css
     generateStarRating(rating) {
         let stars = "";
         for (let i = 0; i < 5; i++) {
@@ -487,11 +508,15 @@ class QuizUI {
 
     // display quiz results as a character card
     showResults() {
+        //display the last page
         this.quizPage.style.display = "none";
         this.resultsPage.style.display = "block";
 
+        //getResult returns mbti character dict from the mbti dict
         const result = this.quiz.getResult();
+        //assign type to type from result dict
         const mbtiType = result.type;
+        //obtains character dict for some reason again using type name
         const character = MBTICharacters[mbtiType];
 
         // set character data
@@ -502,7 +527,7 @@ class QuizUI {
         this.characterImage.alt = character.title;
 
         // set population text
-        this.populationText.textContent = `This flavour is ${character.population} of all ingredients in the world!`;
+        this.populationText.textContent = `This tea is ${character.population} of all flavours in the world!`;
 
         // set traits
         this.trait.textContent = character.traits;
@@ -510,10 +535,11 @@ class QuizUI {
         //set description
         this.description.textContent = character.description;
 
-        // set quote
+        // set quote, got the dollar sign so that can include the quotation marks
         this.quote.textContent = `"${character.quote}"`;
 
-        // set stats with star ratings
+        // set stats with star ratings, this edits the icons only
+        //.innerhtml is instead of text-content, basiaclly askign to add content inside the div
         this.sweetnessStat.innerHTML = this.generateStarRating(character.stats.sweetness);
         this.adaptabilityStat.innerHTML = this.generateStarRating(character.stats.adaptability);
         this.boldnessStat.innerHTML = this.generateStarRating(character.stats.boldness);
@@ -526,13 +552,16 @@ class QuizUI {
 
         this.compatible1.src = getTypeImage(compatibles[0]);
         this.compatible1.alt = compatibles[0];
+        this.compatible1text.textContent = MBTICharacters[compatibles[0]].title;
 
         
         this.compatible2.src = getTypeImage(compatibles[1]);
         this.compatible2.alt = compatibles[1];
+        this.compatible2text.textContent = MBTICharacters[compatibles[1]].title;
         
         this.incompatible1.src = getTypeImage(incompatibles[0]);
         this.incompatible1.alt = incompatibles[0];
+        this.incompatible1text.textContent = MBTICharacters[incompatibles[0]].title;
         
 
     }
@@ -560,33 +589,41 @@ class TeaQuiz {
     }
 
     // get current question
+    //returns question based on index provided by the currentQuestion counter
     getCurrentQuestion() {
         return questions[this.currentQuestion];
     }
 
     // record user's answer and move to next question
     answerQuestion(type) {
+        //Updates type for which option was selected 
+        //increases question count by 1
+        //return boolean if quiz is completed or not
         this.userAnswers[type] += 1;
         this.currentQuestion += 1;
         return this.isQuizComplete();
     }
 
-    // check if quiz is complete
+    // check if quiz is complete, by checking if all questions have been asked
+    //returns boolean
     isQuizComplete() {
         return this.currentQuestion >= questions.length;
     }
 
     // get current progress percentage
+    //used to calcualte bar width
     getProgress() {
         return (this.currentQuestion / questions.length) * 100;
     }
 
-    // get current question number
+    // get current question number by adding 1 from the previous time it was called
     getQuestionNumber() {
         return this.currentQuestion + 1;
     }
 
     // get personality type based on user answers
+    // Sees which count was bigger and assigns the value to the variable type
+    //joins the strings together
     calculateMBTI() {
         const type = [
             this.userAnswers.E >= this.userAnswers.I ? 'E' : 'I',
@@ -599,6 +636,8 @@ class TeaQuiz {
     }
 
     // get result personality type details
+    //recieves mbti calucation from the calcualteMBTI function
+    //returns type and correspodning dictionary values from mbti dict 
     getResult() {
         const mbtiType = this.calculateMBTI();
         return {
@@ -608,6 +647,7 @@ class TeaQuiz {
     }
 
     // reset the quiz
+    //reset the values we initially initialised
     reset() {
         this.currentQuestion = 0;
         this.userAnswers = {

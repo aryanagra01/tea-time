@@ -3,9 +3,9 @@
 :root {
 
 
-    --tea-yellow: #fafa83;
+    --tea-yellow: #f5f59b;
     --tea-yellow-dark: #f9d804;
-    --tea-yellow-light: #fafabb;
+    --tea-yellow-light: #f8f8c4;
     --tea-yellow-super-light: #f8fcdb;
     --tea-green-light: #8cfc5f;
     --tea-green-dark: #1adf1d;
@@ -22,7 +22,7 @@
 
 
     /* varying gradient values to account for different browsers */
-    --tea-spicy-gradient: linear-gradient(111.4deg, rgb(116, 195, 12) 1%, rgb(217, 242, 71) 58%);
+    --tea-spicy-gradient: linear-gradient(111.4deg, rgb(97, 170, 2) 1%, rgb(8, 162, 0) 58%);
     --tea-hot-gradient: linear-gradient(90deg, rgb(175, 202, 53) 0%, rgb(46, 184, 0) 100%);
 }
 
@@ -60,12 +60,19 @@ body {
     100% { transform: scale(1); }
 }
 
-@media (max-width: 800px) {
-
+@media (max-width: 1200px) {
     .quiz-container {
-     padding: 3rem;
-     border-radius: 10px;
-   }
+        padding: 2em 2em;
+    }
+}
+
+@media (max-width: 900px) {
+
+    /* .quiz-container {
+     /* padding: 1rem;
+     margin: 5vw;
+     border-radius: 10px; 
+   } */
    .quiz-page {
     justify-content: center;
 }
