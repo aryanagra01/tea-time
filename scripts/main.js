@@ -25,112 +25,128 @@ const questions = [
       options: [
         { text: "Hosting a lively tea party with friends", type: "E" },
         { text: "Savoring a quiet cup alone with a book", type: "I" }
-      ]
+      ],
+      image: "assets/teatime_png.png"
     },
     {
       question: "When picking a new tea, you go for...",
       options: [
         { text: "A flavor I know and trust", type: "S" },
         { text: "Something new and experimental", type: "N" }
-      ]
+      ],
+      image: "assets/teaflavours.png"
     },
     {
       question: "Your ideal tea blend is based on...",
       options: [
         { text: "The health benefits and ingredients", type: "T" },
         { text: "How it makes me feel emotionally", type: "F" }
-      ]
+      ],
+      image: "assets/blend.png"
     },
     {
       question: "You brew your tea...",
       options: [
         { text: "With a precise steep time and temperature", type: "J" },
         { text: "By feel — I like to improvise!", type: "P" }
-      ]
+      ],
+      image: "assets/brew.png"
     },
     {
       question: "At a tea cafe, you’re more likely to...",
       options: [
         { text: "Chat with the barista and meet others", type: "E" },
         { text: "Sit in a corner and enjoy the ambiance", type: "I" }
-      ]
+      ],
+      image: "assets/cafe.png"
     },
     {
       question: "Choosing a tea gift for a friend, you...",
       options: [
         { text: "Pick a practical and popular flavor", type: "S" },
         { text: "Choose a unique blend with a story", type: "N" }
-      ]
+      ],
+      image: "assets/gift.png"
     },
     {
       question: "When discussing tea types, you tend to...",
       options: [
         { text: "Stick to facts and comparisons", type: "T" },
         { text: "Talk about memories or feelings tied to each tea", type: "F" }
-      ]
+      ],
+      image: "assets/discussion.png"
     },
     {
       question: "Organizing your tea collection, you prefer...",
       options: [
         { text: "Labelled jars and neat rows", type: "J" },
         { text: "A cozy, spontaneous stash", type: "P" }
-      ]
+      ],
+      image: "assets/jars.png"
     },
     {
       question: "A tea tasting event sounds...",
       options: [
         { text: "Exciting — I get to meet people and try many kinds!", type: "E" },
         { text: "A bit draining — I’d prefer a calm tasting at home", type: "I" }
-      ]
+      ],
+      image: "assets/tasting.png"
     },
     {
       question: "When trying a complex tea blend, you...",
       options: [
         { text: "Focus on tasting each individual note", type: "S" },
         { text: "Imagine the story the blend is telling", type: "N" }
-      ]
+      ],
+      image: "assets/complex.png"
     },
     {
       question: "Someone doesn’t like your favorite tea. You...",
       options: [
         { text: "Debate with them about its strengths", type: "T" },
         { text: "Respect their feelings and move on", type: "F" }
-      ]
+      ],
+      image: "assets/talking.png"
     },
     {
       question: "How do you plan a tea picnic?",
       options: [
         { text: "Create a checklist and plan every detail", type: "J" },
         { text: "Pack what feels right and see where it leads", type: "P" }
-      ]
+      ],
+      image: "assets/picnic.webp"
     },
     {
       question: "Tea tasting in a group — you...",
       options: [
         { text: "Enjoy the chatter and exchanging thoughts", type: "E" },
         { text: "Observe quietly and note your impressions", type: "I" }
-      ]
+      ],
+      image: "assets/group.png"
     },
     {
       question: "When reading about teas, you prefer...",
       options: [
         { text: "Historical and regional facts", type: "S" },
         { text: "Legends and philosophical meanings", type: "N" }
-      ]
+      ],
+      image: "assets/reading.webp"
     },
     {
       question: "When choosing a tea cafe, you go for...",
       options: [
         { text: "The one with the best ratings and quality", type: "T" },
         { text: "The one with the best vibe and kindness", type: "F" }
-      ]
+      ],
+      image: "assets/teashop.png"
     },
     {
       question: "Tea recipes: you...",
       options: [
         { text: "Follow the recipe exactly", type: "J" },
         { text: "Improvise and mix things up", type: "P" }
-      ]
+      ],
+      image: "assets/recipe.png"
     }
   ];
   
@@ -395,6 +411,7 @@ class QuizUI {
         this.optionsContainer = document.getElementsByClassName("options")[0];
         this.progressBar = document.getElementsByClassName("progress")[0];
         this.questionNumber = document.getElementsByClassName("question-number")[0];
+        this.questionImage = document.getElementsByClassName("question-image")[0];
         
         // character card elements
         this.resultType = document.getElementsByClassName("result-type")[0];
@@ -458,6 +475,7 @@ class QuizUI {
         //Replace text in the question
         const currentQuestion = this.quiz.getCurrentQuestion();
         this.questionText.textContent = currentQuestion.question;
+        this.questionImage.src = currentQuestion.image;
 
         // Clear previous options by emptying out the options container
         this.optionsContainer.innerHTML = "";
